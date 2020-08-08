@@ -6,6 +6,9 @@
 
 (in-package #:org.shirakumo.messagebox)
 
+(cffi:define-foreign-library user32
+  (:windows "User32.dll"))
+
 (cffi:defcenum result
   (:failed 0)
   (:ok 1)
@@ -60,6 +63,8 @@
   (language-id :unsigned-short))
 
 (define-implementation (text &key title (type :info) buttons modal &allow-other-keys)
+  (unless (cffi:foreign-library-loaded-p 'user32)
+    (cffi:load-foreign-library 'user32))
   (let* ((text (org.shirakumo.com-on:string->wstring text))
          (title (org.shirakumo.com-on:string->wstring (or title (string-capitalize type))))
          (result (win-message-box (cffi:null-pointer) text title
