@@ -22,6 +22,8 @@
                (:file "win32" :if-feature :windows)
                (:file "documentation"))
   :depends-on ((:feature :darwin :cffi)
+               (:feature :darwin :trivial-main-thread)
+               (:feature :darwin :float-features)
                (:feature :windows :com-on)
                (:feature :linux :uiop)
                :documentation-utils))

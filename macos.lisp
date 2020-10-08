@@ -68,7 +68,13 @@
 
 (cffi:defcenum NSModalResponse
   (:cancel 0)
-  (:ok 1))
+  (:ok 1)
+  (:stop -1000)
+  (:abort -1001)
+  (:continue -1002)
+  (:first 1000)
+  (:second 1001)
+  (:third 1002))
 
 (cffi:defcenum NSAlertStyle
   (:warning 0)
@@ -122,15 +128,15 @@
                       (objc-call window "addButtonWithTitle:" :pointer (nsstring "Yes"))
                       (objc-call window "addButtonWithTitle:" :pointer (nsstring "No")))
                      (T
-                      (obc-call window "addButtonWithTitle:" :pointer (nsstring "Ok"))))
+                      (objc-call window "addButtonWithTitle:" :pointer (nsstring "Ok"))))
                    (ecase (unwind-protect (objc-call window "runModal" NSModalResponse)
                             ;; This is necessary to get the window to close.
                             (loop while (process-event app)))
-                     (:cancel
+                     ((:cancel :stop :abort :second)
                       (case type
                         (:question :no)
                         (T :cancel)))
-                     (:ok
+                     ((:ok :first :continue)
                       (case type
                         (:question :yes)
                         (T :ok)))))))
