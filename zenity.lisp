@@ -15,7 +15,7 @@
 
 ;; FIXME: figure out whether display is present or not (both X11 and Wayland)
 (define-implementation (text &key title (type :info) modal &allow-other-keys)
-  (ecase (zenity (ecase type
+  (case (zenity (ecase type
                    (:info "--info")
                    (:error "--error")
                    (:warning "--warning")
@@ -28,4 +28,9 @@
          (T :ok)))
     (1 (case type
          (:question :no)
-         (T :cancel)))))
+         (T :cancel)))
+    (5 (case type
+         (:question :no)
+         (T :cancel)))
+    (T
+     (error 'messagebox-failed))))
