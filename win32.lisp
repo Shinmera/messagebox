@@ -19,7 +19,8 @@
   (:yes 6)
   (:no 7)
   (:try-again 10)
-  (:continue 11))
+  (:continue 11)
+  (:wtf 4294967295))
 
 (cffi:defbitfield type
   (:ok #x00000000)
@@ -77,6 +78,6 @@
                                   0)))
     (cffi:foreign-free text)
     (cffi:foreign-free title)
-    (if (eql :failed result)
+    (if (or (eql :wtf result) (eql :failed result))
         (error 'messagebox-failed)
         result)))
