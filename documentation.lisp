@@ -1,6 +1,16 @@
 (in-package #:org.shirakumo.messagebox)
 
 (docs:define-docs
+  (type messagebox-failed
+    "Error signalled when the messagebox fails to be shown.
+
+See SHOW")
+
+  (type no-backend-found
+    "Error signalled if no suitable backend can be found at all.
+
+See MESSAGEBOX-FAILED")
+
   (function show
     "Show a message box dialog.
 
@@ -14,8 +24,8 @@ TYPE  --- What kind of message to display. Should be one of
 MODAL --- Whether the dialog should be modal to the application
           May not make a difference on some systems.
 
-If the backend fails or no suitable backend is present, the
-dialog is shown on *ERROR-OUTPUT*.
+If the dialog fails to show, an error of type MESSAGEBOX-FAILED is
+signalled.
 
 Depending on the backend further options may be supported.
 
@@ -25,7 +35,7 @@ traces using this function. It is instead recommended to write
 relevant debug information to a file and refer to this file in the
 displayed message.
 
-This function should not error.
-
 Returns :OK, :YES, :NO, or :CANCEL. :YES and :NO can only be
-returned if the TYPE is :QUESTION."))
+returned if the TYPE is :QUESTION.
+
+See MESSAGEBOX-FAILED"))

@@ -1,4 +1,4 @@
-(in-package #:org.shirakumo.messagebox)
+(in-package #:org.shirakumo.messagebox.macos)
 
 (cffi:define-foreign-library cocoa
   (t (:framework "Cocoa")))
@@ -9,7 +9,6 @@
 (cffi:define-foreign-library foundation
   (t (:framework "Foundation")))
 
-(cffi:defctype size_t #+x86-64 :uint64 #+x86 :uint32 #-(or x86-64 x86) :long)
 (cffi:defctype id :pointer)
 (cffi:defctype oclass :pointer)
 (cffi:defctype sel :pointer)
@@ -98,7 +97,7 @@
   #+darwin `(trivial-main-thread:with-body-in-main-thread ,args ,@body)
   #-darwin `(progn ,@body))
 
-(define-implementation (text &key title (type :info) &allow-other-keys)
+(org.shirakumo.messagebox::define-implementation macos (text &key title (type :info) &allow-other-keys)
   (unless (cffi:foreign-library-loaded-p 'cocoa)
     (cffi:load-foreign-library 'foundation)
     (cffi:load-foreign-library 'appkit)

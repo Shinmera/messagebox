@@ -1,11 +1,11 @@
-(in-package #:org.shirakumo.messagebox)
+(in-package #:org.shirakumo.messagebox.nxgl)
 
-(define-implementation (text &key title (type :info) modal (code 0) &allow-other-keys)
+(org.shirakumo.messagebox::define-implementation nxgl (text &key (type :info) (code 0) &allow-other-keys)
     (declare (ignore modal title))
-    (ecase type
+    (case type
       (:error
        (let ((text (if (< 1024 (length text)) (subseq text 0 1024) text)))
          (unless (cffi:foreign-funcall "nxgl_show_error" :int32 code :string text :string text :bool)
            (error 'messagebox-failed))))
-      ((:info :warning :question :line :text :password)
-       (error 'messagebox-failed))))
+      (T
+       (error 'org.shirakumo.messagebox:messagebox-failed))))

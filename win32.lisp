@@ -1,4 +1,4 @@
-(in-package #:org.shirakumo.messagebox)
+(in-package #:org.shirakumo.messagebox.win32)
 
 (cffi:define-foreign-library user32
   (:windows "User32.dll"))
@@ -57,7 +57,7 @@
   (type type)
   (language-id :unsigned-short))
 
-(define-implementation (text &key title (type :info) buttons modal &allow-other-keys)
+(org.shirakumo.messagebox::define-implementation win32 (text &key title (type :info) buttons modal &allow-other-keys)
   (unless (cffi:foreign-library-loaded-p 'user32)
     (cffi:load-foreign-library 'user32))
   (let* ((text (org.shirakumo.com-on:string->wstring text))
@@ -73,5 +73,5 @@
     (cffi:foreign-free text)
     (cffi:foreign-free title)
     (if (or (eql :wtf result) (eql :failed result))
-        (error 'messagebox-failed)
+        (error 'org.shirakumo.messagebox:messagebox-failed)
         result)))
