@@ -10,3 +10,12 @@ Simply call ``show``:
 ::
 
 The returned value will be ``:OK``, ``:CANCEL``, ``:YES``, or ``:NO`` depending on the type of box.
+
+## Supported Backends
+The following box backends are currently supported:
+
+- ``macos`` (AppKit/Cocoa)
+- ``win32`` (MessageBoxEx)
+- ``zenity``/``matedialog``,``qarma``
+- ``kdialog``
+- ``nxgl``
