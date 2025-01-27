@@ -22,6 +22,6 @@
                (:feature :darwin :trivial-main-thread)
                (:feature :darwin :float-features)
                (:feature :windows :com-on)
-               (:feature :linux :uiop)
                (:feature :nx :cffi)
+               :uiop
                :documentation-utils))
