@@ -2,7 +2,7 @@
 
 (define-condition no-backend-found (messagebox-failed)
   ()
-  (:report (lambda (c s) (format s "No usable backend for file-select could be found!"))))
+  (:report (lambda (c s) (format s "No usable backend for messagebox could be found!"))))
 
 (defun split (char string)
   (let ((paths ())
