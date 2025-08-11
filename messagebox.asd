@@ -4,9 +4,9 @@
   :author "Yukari Hafner <shinmera@tymoon.eu>"
   :maintainer "Yukari Hafner <shinmera@tymoon.eu>"
   :description "A library to show a native message box dialog."
-  :homepage "https://shinmera.github.io/messagebox/"
-  :bug-tracker "https://github.com/shinmera/messagebox/issues"
-  :source-control (:git "https://github.com/shinmera/messagebox.git")
+  :homepage "https://shinmera.com/docs/messagebox/"
+  :bug-tracker "https://shinmera.com/project/messagebox/issues"
+  :source-control (:git "https://shinmera.com/project/messagebox.git")
   :serial T
   :defsystem-depends-on (:trivial-features)
   :components ((:file "package")
